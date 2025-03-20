@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physik Bildung - Modern Physics Education</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-lightbulb-fill me-2"></i>
+                Physik Bildung
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">
+                            <i class="bi bi-house me-1"></i> Startseite
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#formulas">
+                            <i class="bi bi-diagram-3 me-1"></i> Formeln
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculator">
+                            <i class="bi bi-calculator me-1"></i> Rechner
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#topics">
+                            <i class="bi bi-book me-1"></i> Themen
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#forum">
+                            <i class="bi bi-chat-dots me-1"></i> Forum
+                        </a>
+                    </li>
+                </ul>
+                <div class="ms-auto d-flex align-items-center">
+                    <div class="input-group me-3">
+                        <input type="text" class="form-control" placeholder="Suchen..." id="searchInput">
+                        <button class="btn btn-light" type="button" id="searchButton">
+                            <i class="bi bi-search"></i> Suchen
+                        </button>
+                    </div>
+                    <!-- Auth buttons will be dynamically shown/hidden -->
+                    <div id="authButtons">
+                        <button class="btn btn-outline-light me-2" type="button" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="bi bi-box-arrow-in-right"></i> Anmelden
+                        </button>
+                        <button class="btn btn-light" type="button" id="registerButton" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            <i class="bi bi-person-plus"></i> Registrieren
+                        </button>
+                    </div>
+                    <div id="userMenu" class="dropdown" style="display: none;">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> <span id="usernameDisplay"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
+                            <li><a class="dropdown-item" href="#profile"><i class="bi bi-person"></i> Mein Profil</a></li>
+                            <li><a class="dropdown-item" href="#favorites"><i class="bi bi-star"></i> Meine Favoriten</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutButton"><i class="bi bi-box-arrow-right"></i> Abmelden</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Home Section -->
+        <section id="home" class="active-section">
+            <div class="jumbotron p-5 bg-light rounded shadow-sm">
+                <h1 class="display-4">Willkommen bei Physik Bildung</h1>
+                <p class="lead">Deine umfassende Ressource für das Physiklernen</p>
+                <hr class="my-4">
+                <p>Entdecke eine Bibliothek von Physikformeln, Rechnern und Bildungsinhalten für Schüler.</p>
+                <a class="btn btn-primary btn-lg mt-2" href="#topics" role="button">
+                    <i class="bi bi-book"></i> Themen erkunden
+                </a>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h2 class="mb-4">Über Physik Bildung</h2>
+                            <p>Physik Bildung bietet dir einen umfassenden Überblick über die wichtigsten Konzepte der Physik, die für Schüler relevant sind. Unser Ziel ist es, komplexe physikalische Konzepte auf verständliche und zugängliche Weise zu erklären.</p>
+                            
+                            <h4 class="mt-4 mb-3">Was wir bieten:</h4>
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item bg-transparent">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i> 
+                                    <strong>Thematische Übersichten</strong> mit ausführlichen Erklärungen und Beispielen
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i> 
+                                    <strong>Interaktive Formeln</strong> mit Erläuterungen aller Variablen und Einheiten
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i> 
+                                    <strong>Physikrechner</strong> zum einfachen Lösen von Aufgaben
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i> 
+                                    <strong>Übungsaufgaben</strong> mit Schritt-für-Schritt-Lösungen
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-header">
+                                    <i class="bi bi-diagram-3 me-2"></i> Formeln
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Zugriff auf eine umfassende Bibliothek von Physikformeln mit detaillierten Erklärungen und Beispielen.</p>
+                                    <a href="#formulas" class="btn btn-primary w-100 formula-link">
+                                        <i class="bi bi-arrow-right"></i> Formeln erkunden
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-header">
+                                    <i class="bi bi-calculator me-2"></i> Rechner
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Löse Physikprobleme mit unserem spezialisierten Rechner. Wähle eine Formel und gib deine Variablen ein.</p>
+                                    <a href="#calculator" class="btn btn-primary w-100 calculator-link">
+                                        <i class="bi bi-arrow-right"></i> Rechner öffnen
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-header">
+                                    <i class="bi bi-book me-2"></i> Themen
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Erkunde verschiedene Physikthemen mit ausführlichen Erklärungen und relevanten Formeln.</p>
+                                    <a href="#topics" class="btn btn-primary w-100 topic-link">
+                                        <i class="bi bi-arrow-right"></i> Themen durchsuchen
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header">
+                            <i class="bi bi-lightbulb me-2"></i> Beliebte Themen
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Mechanik</h5>
+                                            <p class="card-text">Newtonsche Gesetze, Kräfte, Bewegung, Energie und Impuls.</p>
+                                            <a href="#topics" class="stretched-link topic-link"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Elektrizität</h5>
+                                            <p class="card-text">Elektrische Felder, Stromkreise, Ladungen und Ohmsches Gesetz.</p>
+                                            <a href="#topics" class="stretched-link topic-link"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Thermodynamik</h5>
+                                            <p class="card-text">Wärme, Temperatur, thermodynamische Prozesse und Gesetze.</p>
+                                            <a href="#topics" class="stretched-link topic-link"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulas Section -->
+        <section id="formulas" class="section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-diagram-3 me-2"></i> Physikformeln</h2>
+            </div>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <p>Auf dieser Seite findest du wichtige Formeln der Physik nach Themengebieten geordnet. Jede Formel kommt mit einer detaillierten Erklärung, Beispielrechnungen und Anwendungsbereichen.</p>
+                    
+                    <div class="input-group mt-3">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Formeln filtern..." id="formulaSearchInput">
+                        <button class="btn btn-primary" type="button" id="formulaSearchButton">Filtern</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header">
+                            <i class="bi bi-filter me-2"></i> Kategorien
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action active" data-category="all">Alle Formeln</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-category="mechanics">Mechanik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-category="electricity">Elektrizität</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-category="thermodynamics">Thermodynamik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-category="optics">Optik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-category="modern">Moderne Physik</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-9">
+                    <div class="row" id="formulasList">
+                        <!-- Formula cards will be dynamically generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Formula Detail Modal -->
+        <div class="modal fade" id="formulaDetailModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="formulaDetailTitle">Formeldetails</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                    </div>
+                    <div class="modal-body" id="formulaDetailBody">
+                        <!-- Formula details will be dynamically loaded here -->
+                        <div class="formula-detail-placeholder">
+                            <div class="formula-detail-header mb-4">
+                                <h4 class="formula-name mb-3"></h4>
+                                <div class="formula-equation p-3 text-center mb-3"></div>
+                            </div>
+                            
+                            <div class="formula-detail-variables mb-4">
+                                <h5><i class="bi bi-list-ul me-2"></i>Variablen und Einheiten</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Symbol</th>
+                                                <th>Beschreibung</th>
+                                                <th>Einheit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="variable-list">
+                                            <!-- Variables will be dynamically inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="formula-detail-explanation mb-4">
+                                <h5><i class="bi bi-info-circle me-2"></i>Erklärung</h5>
+                                <div class="explanation-content p-3 mb-3"></div>
+                            </div>
+                            
+                            <div class="formula-detail-examples mb-4">
+                                <h5><i class="bi bi-calculator me-2"></i>Beispielrechnungen</h5>
+                                <div class="example-content p-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                        <button type="button" class="btn btn-primary" id="useInCalculatorBtn">
+                            <i class="bi bi-calculator me-1"></i> Im Rechner verwenden
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Calculator Section -->
+        <section id="calculator" class="section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-calculator me-2"></i> Physikrechner</h2>
+            </div>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <p>Mit diesem Rechner kannst du physikalische Aufgaben schnell und genau lösen. Wähle eine Formel aus, gib die bekannten Variablen ein und berechne die gesuchte Größe.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-diagram-3 me-2"></i> Formel auswählen
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="formulaSelect" class="form-label">Wähle eine Formel aus der Liste:</label>
+                                <select class="form-select form-select-lg mb-3" id="formulaSelect">
+                                    <option value="" selected>Formel auswählen...</option>
+                                    <!-- Options will be generated dynamically -->
+                                </select>
+                            </div>
+                            
+                            <div id="selectedFormula" class="formula-equation mb-3 text-center">
+                                <!-- Selected formula will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header">
+                            <i class="bi bi-input-cursor-text me-2"></i> Variablen eingeben
+                        </div>
+                        <div class="card-body">
+                            <form id="calculatorForm">
+                                <div class="mb-4">
+                                    <label for="solveFor" class="form-label fw-bold">Berechnen nach:</label>
+                                    <select class="form-select mb-4" id="solveFor">
+                                        <option value="" selected>Wähle die gesuchte Variable...</option>
+                                        <!-- Options will be generated dynamically -->
+                                    </select>
+                                </div>
+                                
+                                <div id="variablesInputs" class="mb-4">
+                                    <!-- Variable inputs will be generated dynamically -->
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle-fill me-2"></i> Bitte wähle zuerst eine Formel aus.
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-lightning-charge me-2"></i> Berechnen
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-check-circle me-2"></i> Ergebnis
+                        </div>
+                        <div class="card-body">
+                            <div id="calculationResult" class="p-4 bg-light rounded border mb-3">
+                                <div class="text-center py-4">
+                                    <i class="bi bi-arrow-left-circle fs-1 text-secondary mb-3"></i>
+                                    <p class="mb-0">Wähle eine Formel und gib die Variablen ein, um das Ergebnis zu berechnen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header">
+                            <i class="bi bi-clock-history me-2"></i> Berechnungsverlauf
+                        </div>
+                        <div class="card-body">
+                            <div id="historyContainer">
+                                <ul class="list-group list-group-flush" id="calculationHistory">
+                                    <!-- History items will be added dynamically -->
+                                </ul>
+                                <div class="text-center pt-3" id="emptyHistory">
+                                    <p class="text-muted"><i class="bi bi-info-circle me-1"></i> Der Verlauf ist leer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <div class="card-header">
+                            <i class="bi bi-question-circle me-2"></i> Hilfe
+                        </div>
+                        <div class="card-body">
+                            <div class="accordion" id="calculatorHelp">
+                                <div class="accordion-item border-0">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#helpOne">
+                                            Wie benutze ich den Rechner?
+                                        </button>
+                                    </h2>
+                                    <div id="helpOne" class="accordion-collapse collapse" data-bs-parent="#calculatorHelp">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Wähle eine Formel aus der Liste aus</li>
+                                                <li>Wähle die Variable, die du berechnen möchtest</li>
+                                                <li>Gib die bekannten Werte für die anderen Variablen ein</li>
+                                                <li>Klicke auf "Berechnen"</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item border-0">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#helpTwo">
+                                            Welche Einheiten muss ich verwenden?
+                                        </button>
+                                    </h2>
+                                    <div id="helpTwo" class="accordion-collapse collapse" data-bs-parent="#calculatorHelp">
+                                        <div class="accordion-body">
+                                            Verwende für deine Eingaben immer SI-Einheiten, sofern nicht anders angegeben:
+                                            <ul>
+                                                <li>Länge: Meter (m)</li>
+                                                <li>Masse: Kilogramm (kg)</li>
+                                                <li>Zeit: Sekunden (s)</li>
+                                                <li>Strom: Ampere (A)</li>
+                                                <li>Kraft: Newton (N)</li>
+                                                <li>Energie: Joule (J)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section id="topics" class="section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-book me-2"></i> Physikthemen</h2>
+            </div>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <p>Hier findest du umfassende Erklärungen zu wichtigen Themengebieten der Physik. Jedes Thema enthält detaillierte Erläuterungen, Illustrationen, relevante Formeln und Beispiele.</p>
+                    
+                    <div class="input-group mt-3">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Themen filtern..." id="topicSearchInput">
+                        <button class="btn btn-primary" type="button" id="topicSearchButton">Filtern</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="topicsList">
+                <!-- Topic cards will be dynamically generated here -->
+                
+                <!-- Sample topic cards for better UI visualization -->
+                <div class="col-md-6 col-lg-4 mb-4 sample-topic">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-box me-2"></i> Mechanik</span>
+                            <span class="badge bg-secondary">Grundlagen</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Newtonsche Gesetze</h5>
+                            <p class="card-text topic-description">Die drei Newtonschen Gesetze bilden die Grundlage der klassischen Mechanik und beschreiben die Bewegung von Körpern unter dem Einfluss von Kräften.</p>
+                            <button class="btn btn-primary mt-2 w-100" onclick="showTopicDetails('newton')">
+                                <i class="bi bi-book me-1"></i> Mehr erfahren
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 sample-topic">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-lightning me-2"></i> Elektrizität</span>
+                            <span class="badge bg-secondary">Grundlagen</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ohmsches Gesetz</h5>
+                            <p class="card-text topic-description">Das Ohmsche Gesetz beschreibt den Zusammenhang zwischen elektrischer Spannung, Stromstärke und Widerstand in einem elektrischen Stromkreis.</p>
+                            <button class="btn btn-primary mt-2 w-100" onclick="showTopicDetails('ohm')">
+                                <i class="bi bi-book me-1"></i> Mehr erfahren
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4 sample-topic">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-thermometer-half me-2"></i> Thermodynamik</span>
+                            <span class="badge bg-secondary">Grundlagen</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Thermodynamische Hauptsätze</h5>
+                            <p class="card-text topic-description">Die Hauptsätze der Thermodynamik beschreiben die grundlegenden Prinzipien der Wärmelehre und definieren die Begriffe Energie, Entropie und Temperatur.</p>
+                            <button class="btn btn-primary mt-2 w-100" onclick="showTopicDetails('thermo')">
+                                <i class="bi bi-book me-1"></i> Mehr erfahren
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Topic Detail Modal -->
+        <div class="modal fade" id="topicDetailModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="topicDetailTitle">Themendetails</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                    </div>
+                    <div class="modal-body" id="topicDetailBody">
+                        <!-- Topic details will be dynamically loaded here -->
+                        <div class="topic-detail-placeholder">
+                            <div class="topic-header mb-4">
+                                <h3 class="topic-title mb-3"></h3>
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary me-2 category-badge"></span>
+                                    <span class="small text-muted"></span>
+                                </div>
+                                <hr>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="topic-content">
+                                        <div class="topic-introduction mb-4">
+                                            <h4>Einführung</h4>
+                                            <div class="introduction-content"></div>
+                                        </div>
+                                        
+                                        <div class="topic-explanation mb-4">
+                                            <h4>Erklärung</h4>
+                                            <div class="explanation-content"></div>
+                                        </div>
+                                        
+                                        <div class="topic-examples mb-4">
+                                            <h4>Beispiele</h4>
+                                            <div class="examples-content"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <div class="card border-0 shadow-sm mb-4">
+                                        <div class="card-header">
+                                            <i class="bi bi-diagram-3 me-2"></i> Relevante Formeln
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="topic-formulas">
+                                                <!-- Related formulas will be listed here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-header">
+                                            <i class="bi bi-book me-2"></i> Verwandte Themen
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="topic-related">
+                                                <!-- Related topics will be listed here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                        <button type="button" class="btn btn-primary" id="topicCalculatorBtn">
+                            <i class="bi bi-calculator me-1"></i> Formeln berechnen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results Section -->
+        <section id="searchResults" class="section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-search me-2"></i> Suchergebnisse</h2>
+            </div>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div id="searchSummary" class="mb-3">
+                        <p>Deine Suche nach <strong><span id="searchTerm"></span></strong> ergab <span id="resultCount"></span> Ergebnisse.</p>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="btn-group w-100" role="group" aria-label="Suchergebnisse filtern">
+                                <button type="button" class="btn btn-outline-primary active" data-result-filter="all">Alle Ergebnisse</button>
+                                <button type="button" class="btn btn-outline-primary" data-result-filter="formulas">Formeln</button>
+                                <button type="button" class="btn btn-outline-primary" data-result-filter="topics">Themen</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="searchResultsContent" class="mt-3">
+                        <!-- Search results will be dynamically loaded here -->
+                    </div>
+                    
+                    <div id="noResults" class="text-center py-5 d-none">
+                        <i class="bi bi-search fs-1 text-muted mb-3"></i>
+                        <h4>Keine Ergebnisse gefunden</h4>
+                        <p class="text-muted">Versuche es mit anderen Suchbegriffen oder durchsuche die Themen direkt.</p>
+                        <a href="#topics" class="btn btn-primary mt-3">Alle Themen anzeigen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forum Section -->
+        <section id="forum" class="section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-chat-dots me-2"></i> Community Forum</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newQuestionModal">
+                    <i class="bi bi-plus-circle me-1"></i> Neue Frage stellen
+                </button>
+            </div>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <p>Willkommen im Physik-Forum! Hier kannst du Fragen stellen, anderen helfen und dich mit Mitschülern austauschen. Bitte halte dich an unsere Community-Richtlinien und sei respektvoll.</p>
+                    
+                    <div class="input-group mt-3">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Forum durchsuchen..." id="forumSearchInput">
+                        <button class="btn btn-primary" type="button" id="forumSearchButton">Suchen</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header">
+                            <i class="bi bi-filter me-2"></i> Kategorien
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action active" data-forum-category="all">Alle Fragen</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="mechanics">Mechanik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="electricity">Elektrizität</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="thermodynamics">Thermodynamik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="optics">Optik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="modern">Moderne Physik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="math">Mathematik</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-category="general">Allgemein</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <div class="card-header">
+                            <i class="bi bi-sort-down me-2"></i> Sortieren
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action active" data-forum-sort="newest">Neueste zuerst</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-sort="popular">Beliebteste</a>
+                                <a href="#" class="list-group-item list-group-item-action" data-forum-sort="unanswered">Unbeantwortet</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-9">
+                    <div id="forumQuestionsList">
+                        <!-- Loading-Anzeige -->
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-3">Fragen werden geladen...</p>
+                        </div>
+                        <!-- Fragen werden dynamisch hier eingefügt -->
+                    </div>
+                    
+                    <div id="forumPagination" class="d-flex justify-content-center mt-4">
+                        <!-- Pagination wird dynamisch hier eingefügt -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal für neue Frage -->
+    <div class="modal fade" id="newQuestionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title">Neue Frage stellen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newQuestionForm">
+                        <div class="mb-3">
+                            <label for="questionTitle" class="form-label">Titel der Frage</label>
+                            <input type="text" class="form-control" id="questionTitle" placeholder="Beschreibe dein Problem kurz und präzise" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="questionCategory" class="form-label">Kategorie</label>
+                            <select class="form-select" id="questionCategory" required>
+                                <option value="" selected disabled>Wähle eine Kategorie</option>
+                                <option value="mechanics">Mechanik</option>
+                                <option value="electricity">Elektrizität</option>
+                                <option value="thermodynamics">Thermodynamik</option>
+                                <option value="optics">Optik</option>
+                                <option value="modern">Moderne Physik</option>
+                                <option value="math">Mathematik</option>
+                                <option value="general">Allgemein</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="questionContent" class="form-label">Beschreibung</label>
+                            <textarea class="form-control" id="questionContent" rows="6" placeholder="Beschreibe dein Problem ausführlich. Du kannst Formeln mit $ oder $$ umschließen, um sie mathematisch zu formatieren." required></textarea>
+                            <div class="form-text">Du kannst mathematische Formeln mit $ oder $$ umschließen, z.B. $E = mc^2$ für Inline-Formeln oder $$F = ma$$ für abgesetzte Formeln.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="questionTags" class="form-label">Tags</label>
+                            <input type="text" class="form-control" id="questionTags" placeholder="z.B. Newtonsche Gesetze, Energieerhaltung (durch Kommas getrennt)">
+                            <div class="form-text">Füge relevante Tags hinzu, um deine Frage leichter auffindbar zu machen.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Dein Name (optional)</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Wie möchtest du genannt werden?">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-primary" id="submitQuestionBtn">
+                        <i class="bi bi-send me-1"></i> Frage veröffentlichen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal für Fragendetails -->
+    <div class="modal fade" id="questionDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="questionDetailTitle">Fragendetails</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+                </div>
+                <div class="modal-body" id="questionDetailBody">
+                    <!-- Fragendetails werden dynamisch hier eingefügt -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                    <button type="button" class="btn btn-primary" id="addAnswerBtn">
+                        <i class="bi bi-reply me-1"></i> Antworten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3 fw-bold"><i class="bi bi-lightbulb-fill me-2"></i> Physik Bildung</h5>
+                    <p>Eine umfassende Ressource für Physiklernen mit detaillierten Erklärungen, Formeln und einem interaktiven Rechner für Schüler.</p>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3 fw-bold">Schnellzugriff</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-light text-decoration-none"><i class="bi bi-house me-2"></i> Startseite</a></li>
+                        <li class="mb-2"><a href="#formulas" class="text-light text-decoration-none"><i class="bi bi-diagram-3 me-2"></i> Formeln</a></li>
+                        <li class="mb-2"><a href="#calculator" class="text-light text-decoration-none"><i class="bi bi-calculator me-2"></i> Rechner</a></li>
+                        <li class="mb-2"><a href="#topics" class="text-light text-decoration-none"><i class="bi bi-book me-2"></i> Themen</a></li>
+                        <li class="mb-2"><a href="#forum" class="text-light text-decoration-none"><i class="bi bi-chat-dots me-2"></i> Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5 class="mb-3 fw-bold">Themengebiete</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Mechanik</a></li>
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Elektrizität</a></li>
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Thermodynamik</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Optik</a></li>
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Schwingungen</a></li>
+                                <li class="mb-2"><a href="#" class="text-light text-decoration-none">Moderne Physik</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-4 border-light">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Physik Bildung - Alle Rechte vorbehalten</p>
+                    <p class="mb-0"><strong>Made by Eik</strong></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#" class="text-light"><i class="bi bi-github"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-light"><i class="bi bi-twitter-x"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-light"><i class="bi bi-envelope"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
